@@ -1,5 +1,6 @@
 {
   "name": "datapinter",
+  "displayName": "DataPinter",
   "version": "0.1.0",
   "description": "Research marketplace products, sellers, keywords and affiliates using DataPinter.",
   "author": {
