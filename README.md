@@ -25,14 +25,6 @@ In Claude Code, add this repository as a marketplace, then install DataPinter:
 
 Run `/mcp`, select the DataPinter server and complete its browser OAuth sign-in when prompted. Review the requested access and approve it only for the intended DataPinter account. Restart the session if the installed plugin is not loaded yet.
 
-You can also try a local checkout:
-
-```sh
-git clone https://github.com/datapinter/claude-plugin.git
-claude plugin validate ./claude-plugin
-claude --plugin-dir ./claude-plugin
-```
-
 The plugin adds the `datapinter-research` skill; Claude can use it when a request matches the research workflow. You can also invoke `/datapinter:datapinter-research` directly.
 
 ## Connect only the MCP server in Claude
@@ -66,7 +58,7 @@ The configured research tools cover Shopee, TikTok Shop, Tokopedia, Lazada, Blib
 
 DataPinter receives research parameters and stores account-linked research history, OAuth connection records and operational usage records. Requested results return to the Claude client for the answer. Revoking a connection stops its access; it does not automatically delete stored records.
 
-Manage connections in the [DataPinter app](https://app.datapinter.com/app/connectors). For support or data/account deletion requests, contact [WhatsApp +62 881 6866 088](https://wa.me/628816866088) or [datapinter@gmail.com](mailto:datapinter@gmail.com). Deletion requests are handled by a human team within 1 × 24 hours, with ownership verification as needed and applicable legal retention exceptions. DataPinter deletion does not delete conversations held by Claude or ChatGPT.
+Manage connections in the [DataPinter app](https://app.datapinter.com/app/connectors). For support or data/account deletion requests, contact [WhatsApp +62 881 6866 088](https://wa.me/628816866088) or [support@datapinter.com](mailto:support@datapinter.com). Deletion requests are handled by a human team within 1 × 24 hours, with ownership verification as needed and applicable legal retention exceptions. DataPinter deletion does not delete conversations held by Claude or ChatGPT.
 
 Published policies: [Privacy](https://datapinter.com/privacy-policy/), [Terms](https://datapinter.com/terms-and-conditions/).
 
