@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "datapinter": {
+      "type": "http",
+      "url": "https://api.datapinter.com/mcp"
+    }
+  }
+}

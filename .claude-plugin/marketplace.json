@@ -1,0 +1,16 @@
+{
+  "name": "datapinter-plugins",
+  "owner": {
+    "name": "PT Solusi Penjual Pintar"
+  },
+  "plugins": [
+    {
+      "name": "datapinter",
+      "source": "./",
+      "description": "Research marketplace products, sellers, keywords and affiliates using DataPinter."
+    }
+  ],
+  "metadata": {
+    "description": "DataPinter marketplace research plugin for Claude."
+  }
+}

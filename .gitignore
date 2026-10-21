@@ -1,0 +1,12 @@
+.DS_Store
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.mp4
+*.mov
+*.zip
+node_modules/
+__pycache__/
+/local-materials/
