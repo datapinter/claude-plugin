@@ -9,6 +9,7 @@ Maintained by **PT Solusi Penjual Pintar**. This repository is the public plugin
 ## Requirements
 
 - A DataPinter account with access to the requested research features. Account entitlements and normal service quotas apply in addition to MCP limits.
+- Shopee research tools currently require an eligible paid plan and are unavailable to Free accounts. Discovering a tool does not guarantee that your plan includes it.
 - A Claude client supporting plugins and remote MCP, with installation allowed by your organization when applicable.
 - An internet connection to `https://api.datapinter.com/mcp` and DataPinter's OAuth sign-in pages.
 
@@ -41,16 +42,19 @@ Adding only this connector makes the server's tools available; it does not insta
 
 ## Try it
 
-- “Find 8 best-selling water bottles on Shopee Indonesia. Summarize returned prices, ratings and reported sales with source links.”
-- “Research keyword demand for botol minum and explain what the returned volumes do and do not establish.”
-- “Find Shopee Indonesia shops matching ecentio.”
+- “Find 8 water bottles on TikTok Shop Indonesia. Compare returned prices, ratings and reported sales with source links.”
+- “Find sunscreen stores on Tokopedia and compare the returned store information.”
+- “Research Shopee keyword demand for botol minum and explain what the returned volumes do and do not establish.” (Requires an eligible paid plan.)
+
+Choose the marketplace from the user's request, links, identifiers and region. If it is unclear, ask which marketplace they want and offer TikTok Shop as an option. Do not assume Shopee or silently switch a requested marketplace.
 
 The configured research tools cover Shopee, TikTok Shop, Tokopedia, Lazada, Blibli, Temu, Amazon and Alibaba, with additional affiliate and cross-market research workflows. Operations and country coverage vary by tool; a marketplace name does not imply every feature or country is supported. See the [routing reference](https://github.com/datapinter/claude-plugin/blob/master/skills/datapinter-research/references/tool-routing.md).
 
 ## Limits and boundaries
 
-- MCP allows 10 admitted calls per minute, 100 units per day resetting at midnight Asia/Jakarta, and at most two concurrent calls per user across sessions.
-- Lists return at most 20 results. Supported affiliate batches accept up to five IDs and consume one daily unit per ID; other calls cost one unit. Normal account entitlements may reduce results further. Admitted calls can consume quota even when an upstream request fails.
+- MCP allows 10 admitted calls per minute, a fair-use allowance of 100 resource units per day resetting at midnight WIB (Asia/Jakarta, UTC+7), and at most two concurrent calls per user across sessions.
+- Resource units measure research usage, not the number of returned data records. An ordinary tool call costs one unit; supported affiliate batches accept up to five IDs and cost one unit per ID. For example, a search returning 20 products costs one unit, while a five-ID affiliate batch costs five units. One chat message may trigger multiple tool calls.
+- Lists return at most 20 results. Normal account entitlements may reduce results further or prevent access. Admitted calls can consume quota and resource units even when an upstream request fails.
 - Results may be cached, delayed, incomplete or unavailable. Reported sales, revenue and commission metrics do not guarantee future sales or profit. Compare currencies and reporting periods carefully.
 - Research tools do not purchase goods, modify listings, contact affiliates, transfer money, expose private buyer records or delete accounts.
 
@@ -62,7 +66,15 @@ Manage connections in the [DataPinter app](https://app.datapinter.com/app/connec
 
 Published policies: [Privacy](https://datapinter.com/privacy-policy/), [Terms](https://datapinter.com/terms-and-conditions/).
 
-For authentication failures, reconnect through OAuth. For throttling, follow the returned retry delay; stop when the daily allowance is exhausted. Never paste tokens into an issue. Send sanitized reproduction steps to support.
+Expected access restrictions return a notice with `status: "unavailable"`, a message and next steps. Claude should explain these kindly in the user's language, without presenting them as a broken tool or inventing research results:
+
+- **Feature excluded from the plan:** explain the restriction and suggest upgrading in DataPinter to a plan that includes the feature. Waiting until tomorrow does not unlock it. For blocked Shopee research, offer TikTok Shop or another marketplace if the user wants an alternative; its own access rules and quota still apply.
+- **Daily MCP allowance exhausted:** wait until midnight WIB. Upgrading does not bypass this fixed fair-use limit.
+- **Account research quota exhausted:** check the remaining quota and renewal date in DataPinter; wait for renewal or upgrade/add quota if available. The daily MCP reset does not restore account quota.
+- **Rate or concurrency limit:** respect `retryAfter` in seconds or wait for active calls to finish. Do not retry immediately or switch tools to bypass limits.
+- **Marketplace maintenance:** try again later or offer another marketplace if the user wants one. Upgrading does not resolve maintenance.
+
+For authentication failures, reconnect through OAuth. Never paste tokens into an issue. Send sanitized reproduction steps to support.
 
 ## Validate the plugin
 
